@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1 添加记录
+    form(method='get', action='/records/addRecord')
+        div.form-row
+            label
+                span name:
+                input(type='text',name='record')
+        div.form-row
+            label
+                span age:
+                input(type='text',name='username')
+        div.form-row
+            input(type='submit')
