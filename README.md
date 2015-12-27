@@ -38,9 +38,15 @@
 	+----------+-------------+-------+-----+
 	```
 
+8. 给id添加自增
+	```
+	alter table record modify id integer auto_increment;
+	```
+
 7. 修改数据库信息
 	1. 打开```conf/db.js```
 	2. 配置password和database名称
+
 8. 运行
 	```bash
 	$ npm start
