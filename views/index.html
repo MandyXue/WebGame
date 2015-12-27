@@ -7,111 +7,31 @@
     <title>Game</title>
     <!-- bootstrap css -->
     <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/game.css" rel="stylesheet">
     <!-- bootstrap js -->
     <script src="/js/jquery-1.11.3.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/quintus-all.js"></script>
 </head>
 <body>
-<script type="text/javascript">
-    //set up game
-    var Q = Quintus()
-            .include("Sprites, Scenes, Input, 2D, Touch, UI")
-            .setup({ maximize: true })
-            .controls().touch()
-
-    Q.Sprite.extend("Player",{
-        init: function(p) {
-            this._super(p, { sheet: "player", x: 410, y: 90 });
-            this.add('2d, platformerControls');
-
-            this.on("hit.sprite",function(collision) {
-                if(collision.obj.isA("Tower")) {
-                    Q.stageScene("endGame",1, { label: "You Won!" });
-                    this.destroy();
-                }
-            });
-        }
-    });
-
-    Q.Sprite.extend("Tower", {
-        init: function(p) {
-            this._super(p, { sheet: 'tower' });
-        }
-    });
-
-    Q.Sprite.extend("Enemy",{
-        init: function(p) {
-            this._super(p, { sheet: 'enemy', vx: 100 });
-            this.add('2d, aiBounce');
-
-            this.on("bump.left,bump.right,bump.bottom",function(collision) {
-                if(collision.obj.isA("Player")) {
-                    Q.stageScene("endGame",1, { label: "You Died" });
-                    collision.obj.destroy();
-                }
-            });
-
-            this.on("bump.top",function(collision) {
-                if(collision.obj.isA("Player")) {
-                    this.destroy();
-                    collision.obj.p.vy = -300;
-                }
-            });
-        }
-    });
-
-    Q.scene("level1",function(stage) {
-        stage.collisionLayer(new Q.TileLayer({ dataAsset: 'level.json', sheet: 'tiles' }));
-        var player = stage.insert(new Q.Player());
-
-        stage.add("viewport").follow(player);
-
-        stage.insert(new Q.Enemy({ x: 700, y: 0 }));
-        stage.insert(new Q.Enemy({ x: 800, y: 0 }));
-
-        stage.insert(new Q.Tower({ x: 180, y: 50 }));
-    });
-
-    Q.scene('endGame',function(stage) {
-        var box = stage.insert(new Q.UI.Container({
-            x: Q.width/2, y: Q.height/2, fill: "rgba(0,0,0,0.5)"
-        }));
-
-        var button = box.insert(new Q.UI.Button({ x: 0, y: 0, fill: "#CCCCCC",
-            label: "Play Again" }))
-        var label = box.insert(new Q.UI.Text({x:10, y: -10 - button.p.h,
-            label: stage.options.label }));
-        button.on("click",function() {
-            Q.clearStages();
-            Q.stageScene('level1');
-        });
-        box.fit(20);
-    });
-
-    Q.load("sprites.png, sprites.json, level.json, tiles.png", function() {
-        Q.sheet("tiles","tiles.png", { tilew: 32, tileh: 32 });
-        Q.compileSheets("sprites.png","sprites.json");
-        Q.stageScene("level1");
-    });
-</script>
     <div class="container selfinfo">
         <div class="page-header text-center">
-            <h1>Add Game Record</h1>
-            <p>You win!</p>
+            <h1>Start your game!</h1>
+            <!--<p>You win!</p>-->
         </div>
         <form method="get" action="/records/addRecord">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <div class="form-group">
-                        <label>Your name:</label>
-                        <input type="text"  name="username" class="form-control">
-                        <label>Your record:</label>
-                        <input type="text"  name="record" class="form-control">
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-success">Submit</button>
-                    </div>
+                    <iframe src="/game.html" class="game-view"></iframe>
+                    <!--<div class="form-group">-->
+                        <!--<label>Your name:</label>-->
+                        <!--<input type="text"  name="username" class="form-control">-->
+                        <!--<label>Your record:</label>-->
+                        <!--<input type="text"  name="record" class="form-control">-->
+                    <!--</div>-->
+                    <!--<div class="text-center">-->
+                        <!--<button type="submit" class="btn btn-success">Submit</button>-->
+                    <!--</div>-->
                 </div>
             </div>
         </form>
