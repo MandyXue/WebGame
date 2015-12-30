@@ -1,40 +1,39 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Game</title>
-    <!-- bootstrap css -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/game.css" rel="stylesheet">
-    <!-- bootstrap js -->
-    <script src="/js/jquery-1.11.3.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/quintus-all.js"></script>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<title>Card Game</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<script type="text/javascript" src="/js/common.js" /></script>
+<script type="text/javascript" src="/js/main.js" /></script>
 </head>
+
 <body>
-    <div class="container selfinfo">
-        <div class="page-header text-center">
-            <h1>Start your game!</h1>
-            <!--<p>You win!</p>-->
+
+<div class="board">
+
+    <div class="topplane">
+        <div class="levelplane" id="levelplane">LEVEL <span id="level"></span></div>
+        <div class="process" id="process">
+            <div class="timeplane" id="timeplane">TIME LEFT: <span id="livetime"></span></div>
         </div>
-        <form method="get" action="/records/addRecord">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <iframe src="/game.html" class="game-view"></iframe>
-                    <!--<div class="form-group">-->
-                        <!--<label>Your name:</label>-->
-                        <!--<input type="text"  name="username" class="form-control">-->
-                        <!--<label>Your record:</label>-->
-                        <!--<input type="text"  name="record" class="form-control">-->
-                    <!--</div>-->
-                    <!--<div class="text-center">-->
-                        <!--<button type="submit" class="btn btn-success">Submit</button>-->
-                    <!--</div>-->
-                </div>
-            </div>
-        </form>
+        <div class="clear"></div>
     </div>
+
+    <div class="gameplane" id="gameplane"></div>
+    <div class="tips" id="tips">
+        <p class="title">Game Tips:</p>
+        <p>1. The game will choose 9 cards from 53 cards randomly. Every group has two same cards, with totally 18 cards.<p>
+        <p>2. If you turn over two same cards, they will maintain turnover. When you turn over all the cards, you will win. If the two continuous cards are not the same, you need to turn over again.</p>
+        <p>3. The game contains 10 levels. In each level, if you pass within schedule time, you win.</p>
+        <p>4. If you didn't pass certain level, you will start from that level again.</p>
+        <p class="btn"><a href="javascript:void(0)" id="startgame">Start game!</a></p>
+    </div>
+    <div class="message_start" id="message"></div>
+
+    <div class="clear"></div>
+
+</div>
+
 </body>
 </html>
