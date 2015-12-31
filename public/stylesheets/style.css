@@ -3,13 +3,35 @@ html {
     height: 100%;
 }
 body {
-    background: url(../images/bg.png) repeat;
+    background: url(../images/bg.jpg) no-repeat;
     background-size: 100% auto;
     margin: 0px;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     font-family: "Helvetica", "Times New Roman";
+}
+a {
+    color: #fff;
+}
+a:hover {
+    color: rgba(0,0,0,.2);
+}
+h4 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+img {
+    height: 200px;
+    width: 141px;
+
+}
+
+.panel {
+    position: absolute;
+    top: 30%;
+    width: 70%;
+    margin-left: 13%;
 }
 .board {
     position: absolute;
@@ -39,7 +61,7 @@ body {
 }
 .board .topplane .process {
     float: right;
-    width: 404px;
+    width: 420px;
     height: 100px;
     margin-right: 30px;
     background: transparent;
@@ -50,7 +72,7 @@ body {
     font-size: 18px;
     font-weight: bold;
     color: #FFF;
-    margin: 42px 0px 0px 187px;
+    margin: 42px 0px 0px 0px;
 }
 .board .gameplane {
     width: 1020px;
@@ -106,33 +128,6 @@ body {
     color: #FF0000;
     font-size: 18px;
     margin-bottom: 5px;
-}
-.board .tips .btn {
-    text-align: center;
-    margin-top: 30px;
-}
-.board .tips .btn a {
-    text-decoration: none;
-    width: 100px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    color: #FFFFFF;
-    font-size: 18px;
-    background: #FF0000;
-    margin: 10px auto;
-    padding: 7px;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -o-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-box-shadow: 3px 3px 3px #666666;
-    -webkit-box-shadow: 3px 3px 3px #666666;
-    box-shadow: 3px 3px 3px #666666;
-}
-.board .tips .btn a:hover {
-    text-decoration: none;
-    color: #FFFF00;
 }
 .board .message_start {
     position: absolute;
@@ -297,10 +292,5 @@ body {
     }
 }
 
-img {
-    height: 200px;
-    width: 141px;
-
-}
 
 /** animate end */

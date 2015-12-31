@@ -43,24 +43,7 @@ module.exports = {
             });
         });
     },
-    // delete: function (req, res, next) {
-    //     // delete by Id
-    //     pool.getConnection(function(err, connection) {
-    //         var id = +req.query.id;
-    //         connection.query($sql.delete, id, function(err, result) {
-    //             if(result.affectedRows > 0) {
-    //                 result = {
-    //                     code: 200,
-    //                     msg:'删除成功'
-    //                 };
-    //             } else {
-    //                 result = void 0;
-    //             }
-    //             jsonWrite(res, result);
-    //             connection.release();
-    //         });
-    //     });
-    // },
+
     update: function (req, res, next) {
         // update by id
         // 为了简单，要求同时传name和age两个参数
@@ -102,6 +85,14 @@ module.exports = {
     queryAll: function (req, res, next) {
         pool.getConnection(function(err, connection) {
             connection.query($sql.queryAll, function(err, result) {
+                jsonWrite(res, result);
+                connection.release();
+            });
+        });
+    },
+    queryThree: function (req, res, next) {
+        pool.getConnection(function(err, connection) {
+            connection.query($sql.queryThree, function(err, result) {
                 jsonWrite(res, result);
                 connection.release();
             });

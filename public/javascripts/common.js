@@ -1,15 +1,7 @@
-/** common function */
-
-// get document.getElementBy(id)
-function $(id) {
-    return document.getElementById(id);
-}
-
-
 // get document.getElementsByTagName
 function $_tag(name, id) {
     if (typeof(id) != 'undefined') {
-        return $(id).getElementsByTagName(name);
+        return document.getElementById(id).getElementsByTagName(name);
     } else {
         return document.getElementsByTagName(name);
     }
@@ -57,12 +49,12 @@ function getHtml(id){
  */
 function disp(id, handle, classname) {
     if (handle == 'show') {
-        $(id).style.display = 'block';
+        document.getElementById(id).style.display = 'block';
     } else {
-        $(id).style.display = 'none';
+        document.getElementById(id).style.display = 'none';
     }
     if (typeof(classname) != 'undefined') {
-        $(id).className = classname;
+        document.getElementById(id).className = classname;
     }
 }
 
@@ -127,12 +119,12 @@ function shuffle(arr){
  */
 function setPosition(obj, type, val) {
     switch (type) {
-    case 'top':
-        obj.style.top = val + 'px';
-        break;
-    case 'left':
-        obj.style.left = val + 'px';
-        break;
+        case 'top':
+            obj.style.top = val + 'px';
+            break;
+        case 'left':
+            obj.style.left = val + 'px';
+            break;
     }
 }
 
@@ -144,12 +136,12 @@ function setPosition(obj, type, val) {
 function getPosition(obj, type) {
     var val = 0;
     switch (type) {
-    case 'top':
-        val = obj.style.top;
-        break;
-    case 'left':
-        val = obj.style.left;
-        break;
+        case 'top':
+            val = obj.style.top;
+            break;
+        case 'left':
+            val = obj.style.left;
+            break;
     }
     return parseInt(val);
 }

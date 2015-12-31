@@ -3,37 +3,110 @@
 <head>
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <title>Card Game</title>
-<link rel="stylesheet" type="text/css" href="/css/style.css" />
-<script type="text/javascript" src="/js/common.js" /></script>
-<script type="text/javascript" src="/js/main.js" /></script>
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
 </head>
-
 <body>
-
-<div class="board">
-
-    <div class="topplane">
-        <div class="levelplane" id="levelplane">LEVEL <span id="level"></span></div>
-        <div class="process" id="process">
-            <div class="timeplane" id="timeplane">TIME LEFT: <span id="livetime"></span></div>
+    <div class="board">
+        <div class="topplane">
+            <div class="levelplane" id="levelplane">LEVEL <span id="level"></span>
+            </div>
+            <div class="process" id="process">
+                <div class="timeplane" id="timeplane">
+                    TIME LEFT: <span id="livetime"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    TOTAL TIME: <span id="totaltime"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ranklistmodal">RANKING LIST</button>
+                </div>
+            </div>
+            <div class="clear"></div>
         </div>
+        <div class="gameplane" id="gameplane"></div>
+        <div class="panel panel-danger" id="tips">
+            <div class="panel-heading text-center">
+                <h4>Game Tips</h4>
+            </div>
+            <div class="panel-body">
+                <p>1. The game will choose 9 cards from 53 cards randomly. Every group has two same cards, with totally 18 cards.<p>
+                <p>2. If you turn over two same cards, they will maintain turnover. When you turn over all the cards, you will win. If the two continuous cards are not the same, you need to turn over again.</p>
+                <p>3. The game contains 10 levels. In each level, if you pass within schedule time, you win.</p>
+                <p>4. If you didn't pass certain level, you will start from that level again.</p>
+                <div class="text-center">
+                    <button class="btn btn-danger" id="startgame">START GAME!</button>
+                </div>
+            </div>
+        </div>
+        <div class="message_start" id="message"></div>
         <div class="clear"></div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="ranklistmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <!-- Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Rank List</h4>
+                </div>
+                <!-- Body -->
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Total Time</th>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="gameplane" id="gameplane"></div>
-    <div class="tips" id="tips">
-        <p class="title">Game Tips:</p>
-        <p>1. The game will choose 9 cards from 53 cards randomly. Every group has two same cards, with totally 18 cards.<p>
-        <p>2. If you turn over two same cards, they will maintain turnover. When you turn over all the cards, you will win. If the two continuous cards are not the same, you need to turn over again.</p>
-        <p>3. The game contains 10 levels. In each level, if you pass within schedule time, you win.</p>
-        <p>4. If you didn't pass certain level, you will start from that level again.</p>
-        <p class="btn"><a href="javascript:void(0)" id="startgame">Start game!</a></p>
-    </div>
-    <div class="message_start" id="message"></div>
-
-    <div class="clear"></div>
-
 </div>
-
+<script type="text/javascript">
+var json = '{ "records": [ ' +
+        '{ "record":"123" , "username":"Bill" },' +
+        '{ "record":"182" , "username":"George" }, ' +
+        '{ "record":"187" , "username":"Thomas" }' +
+        ']}';
+//function putThingsInModal(){
+//    var trigger = $("body").find('[data-toggle="ranklistmodal"]');
+//    var obj = eval ("(" + json + ")");
+//    $("tbody").append("<tr><td>1</td><td>" + obj.records[0].record + "</td><td>" + obj.records[0].username + "</td></tr>")
+//    $("tbody").$("tr").each(
+//
+//    )
+//}
+////the function call:
+//
+//$(document).ready(function(){
+//    putThingsInModal();
+//});
+</script>
 </body>
 </html>

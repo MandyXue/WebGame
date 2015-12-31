@@ -2,12 +2,12 @@
 
 window.onload = function(){
     var gameimg = [
-                    'images/start.png', 
-                    'images/success.png',
-                    'images/fail.png',
-                    'images/clear.png',
-                    'images/cardbg.png'
-                  ];
+        'images/start.png',
+        'images/success.png',
+        'images/fail.png',
+        'images/clear.png',
+        'images/cardbg.png'
+    ];
 
     for(var i=1; i<=card.get_total(); i++){
         gameimg.push('images/card' + i + '.png');
@@ -20,6 +20,7 @@ window.onload = function(){
     img_preload(gameimg, callback);
 }
 
+var totalTime = 0;
 
 /** card class */
 var card = (function(total,cardnum){
@@ -38,7 +39,7 @@ var card = (function(total,cardnum){
     // 初始化
     init = function(){
         tips('show');
-        $('startgame').onclick = function(){
+        document.getElementById('startgame').onclick = function(){
             tips('hide');
             start();
         }
@@ -47,6 +48,7 @@ var card = (function(total,cardnum){
 
     // 开始游戏
     start = function(){
+
         reset();
         create(cardnum);
         show();
@@ -54,7 +56,7 @@ var card = (function(total,cardnum){
         var curtime = turntime;
 
         setHtml('livetime', curtime);
-        
+
         var et = setInterval(function(){
             if(curtime==0){
                 clearInterval(et);
@@ -78,12 +80,12 @@ var card = (function(total,cardnum){
     create = function(n){
         carddata = [];
         leveldata = [];
-        
+
         // 创建所有牌
         for(var i=1; i<=total; i++){
             carddata.push(i);
         }
-    
+
         // 抽取牌
         for(var i=0; i<n; i++){
             var curcard = carddata.splice(Math.random()*carddata.length, 1).pop();
@@ -123,7 +125,7 @@ var card = (function(total,cardnum){
     turn_animate = function(key){
         var obj = $_tag('div', 'card' + key);
         var cardfont, cardback;
-        
+
         if(getClass(obj[0]).indexOf('out')!=-1){
             cardfont = obj[0];
             cardback = obj[1];
@@ -162,12 +164,13 @@ var card = (function(total,cardnum){
 
         var et = setInterval(function(){
             if(matchnum==cardnum){
+                totalTime += curtime;
                 clearInterval(et);
                 return ;
             }
             curtime--;
             setHtml('livetime', curtime);
-            
+
             if(curtime==0){
                 clearInterval(et);
                 is_over = 1;
@@ -183,14 +186,14 @@ var card = (function(total,cardnum){
 
         is_lock = 1;
 
-        var message = $('message');
+        var message = document.getElementById('message');
         var processed = 0;
         var opacity = 0;
         var soundtime = {
-                    'start': 1500,
-                    'success': 4000,
-                    'fail': 6000,
-                    'clear': 4000
+            'start': 1500,
+            'success': 4000,
+            'fail': 6000,
+            'clear': 4000
         };
 
         disp('message','show');
@@ -230,7 +233,7 @@ var card = (function(total,cardnum){
         }
 
         var key = parseInt(id.replace('card',''));
-    
+
         if(leveldata[key]['turn']==0){ // 未翻开
             if(first==-1){  // 第一次翻
                 turn_animate(key);
@@ -265,18 +268,18 @@ var card = (function(total,cardnum){
         }else{ // 配对失败,将翻开的牌翻转
 
             var et = setTimeout(function(){
-                    turn_animate(first);
-                    leveldata[first]['turn'] = 0;
-                    turn_animate(key);
-                    leveldata[key]['turn'] = 0;
+                turn_animate(first);
+                leveldata[first]['turn'] = 0;
+                turn_animate(key);
+                leveldata[key]['turn'] = 0;
 
-                    first = -1;
-                    
-                    if(is_over==0){
-                        is_lock = 0;
-                    }
+                first = -1;
 
-                }, 300);
+                if(is_over==0){
+                    is_lock = 0;
+                }
+
+            }, 300);
         }
     }
 
@@ -321,6 +324,7 @@ var card = (function(total,cardnum){
         setHtml('level', level);
         disp('process', 'show');
         setHtml('livetime', '');
+        setHtml('totaltime', totalTime);
         setHtml('gameplane', '');
         is_lock = 1;
         is_over = 0;
