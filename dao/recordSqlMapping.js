@@ -6,7 +6,7 @@ var record = {
     //delete: 'delete from record where id=?',
     queryById: 'select * from record where id=?',
     queryAll: 'select * from record',
-    queryThree: 'SELECT record, username FROM record ORDER BY record ASC LIMIT 3'
+    queryThree: 'SELECT record, username FROM record ORDER BY record DESC LIMIT 3'
 };
 
 module.exports = record;

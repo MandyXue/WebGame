@@ -9,7 +9,7 @@
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
-<script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<!--<script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>-->
 <script>
     function getAndRenderData () {
         $.ajax({
@@ -43,6 +43,38 @@
     });
     })(jQuery);
 
+    function addRecord () {
+        var username = $("input[name='username']")[0].value;
+        $.ajax({
+            url: document.URL+"records/addRecord",
+            // the URL for the request
+            data: {
+                record: totalScore,
+                username: username
+            },
+            type: "GET",
+            // whether this is a POST or GET request
+            dataType: "json",
+            // the type of data we expect back
+            success: function (responseJson) {},
+            error: function (xhr, status) {
+                // code run if request fails; raw request and status
+                console.log("Sorry, there was a problem!");
+            },
+            complete: function (xhr, status) {  	// code to run regardless of success or failure
+                console.log("The request is complete!");
+                $('#addrecord').modal('hide');
+                setTimeout(function(){},2000);
+                location.reload();
+            }
+        })
+    }
+
+    (function($) { $(function() {
+        $('#recordSubmit').click(addRecord);
+    });
+    })(jQuery);
+
 </script>
 </head>
 <body>
@@ -53,7 +85,7 @@
             <div class="process" id="process">
                 <div class="timeplane" id="timeplane">
                     TIME LEFT: <span id="livetime"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                    TOTAL TIME: <span id="totaltime"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+                    TOTAL SCORE: <span id="totalscore"></span>&nbsp;&nbsp;&nbsp;&nbsp;
                     <button id="rankBtn" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ranklistmodal">RANKING LIST</button>
                 </div>
             </div>
@@ -77,36 +109,62 @@
         <div class="message_start" id="message"></div>
         <div class="clear"></div>
 
-        <!-- Modal -->
+        <!-- Rank Modal -->
         <div class="modal fade" id="ranklistmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                <!-- Header -->
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Rank List</h4>
+                    <!-- Header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Rank List</h4>
+                    </div>
+                    <!-- Body -->
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Total Time</th>
+                                    <th>Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-                <!-- Body -->
-                <div class="modal-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Total Time</th>
-                                <th>Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
-                </div>
-                <!-- Footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- Add Record Modal -->
+        <div class="modal fade" id="addrecord" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <!-- Header -->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel2">Add your record</h4>
+                    </div>
+                    <!-- Body -->
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label>Your name</label>
+                                <input type="text" class="form-control" name="username" placeholder="Enter your name...">
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick="setTimeout(function(){},2000);location.reload();">Close</button>
+                        <button type="button" class="btn btn-primary" id="recordSubmit">Submit</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>

@@ -20,7 +20,7 @@ window.onload = function(){
     img_preload(gameimg, callback);
 }
 
-var totalTime = 0;
+var totalScore = 0;
 
 /** card class */
 var card = (function(total,cardnum){
@@ -164,7 +164,7 @@ var card = (function(total,cardnum){
 
         var et = setInterval(function(){
             if(matchnum==cardnum){
-                totalTime += curtime;
+                totalScore += getLevelScore(level) + getTimeScore(gametime[level], curtime);
                 clearInterval(et);
                 return ;
             }
@@ -174,12 +174,13 @@ var card = (function(total,cardnum){
             if(curtime==0){
                 clearInterval(et);
                 is_over = 1;
-                message('fail', start);
+                message('fail');
+                setTimeout(function(){},2000);
+                $('#addrecord').modal('show');
             }
 
         }, 1000);
     }
-
 
     // 游戏讯息动画
     message = function(type, callback){
@@ -324,7 +325,7 @@ var card = (function(total,cardnum){
         setHtml('level', level);
         disp('process', 'show');
         setHtml('livetime', '');
-        setHtml('totaltime', totalTime);
+        setHtml('totalscore', totalScore);
         setHtml('gameplane', '');
         is_lock = 1;
         is_over = 0;

@@ -61,7 +61,7 @@ img {
 }
 .board .topplane .process {
     float: right;
-    width: 420px;
+    width: auto;
     height: 100px;
     margin-right: 30px;
     background: transparent;

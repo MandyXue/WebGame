@@ -169,3 +169,11 @@ function getDefaultStyle(obj, attribute, covert) {
     }
     return attribute;
 }
+
+function getLevelScore(level) {
+    return (80 + level * 20) + level * 10; // 基础加分+等级加分
+}
+
+function getTimeScore(totaltime, curtime) {
+    return (totaltime - curtime) * 15;
+}
