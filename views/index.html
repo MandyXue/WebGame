@@ -9,6 +9,41 @@
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/common.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
+<script language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+<script>
+    function getAndRenderData () {
+        $.ajax({
+            url: document.URL+"records/queryThree/",
+            // the URL for the request
+            type: "GET",
+            // whether this is a POST or GET request
+            dataType: "json",
+            // the type of data we expect back
+            success: function (responseJson) {
+                // code to run if the request succeeds; parameter = response
+                var trHTML = '';
+                $.each(responseJson, function (i, record) {
+                    trHTML += '<tr><td>' + i + '</td><td>' + record.record + '</td><td>' + record.username + '</td></tr>';
+                });
+                $('tbody').html("");
+                $('tbody').append(trHTML);
+            },
+            error: function (xhr, status) {
+                // code run if request fails; raw request and status
+                console.log("Sorry, there was a problem!");
+            },
+            complete: function (xhr, status) {  	// code to run regardless of success or failure
+                console.log("The request is complete!");
+            }
+        })
+    }
+
+    (function($) { $(function() {
+        $('#rankBtn').click(getAndRenderData);
+    });
+    })(jQuery);
+
+</script>
 </head>
 <body>
     <div class="board">
@@ -19,7 +54,7 @@
                 <div class="timeplane" id="timeplane">
                     TIME LEFT: <span id="livetime"></span>&nbsp;&nbsp;&nbsp;&nbsp;
                     TOTAL TIME: <span id="totaltime"></span>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ranklistmodal">RANKING LIST</button>
+                    <button id="rankBtn" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#ranklistmodal">RANKING LIST</button>
                 </div>
             </div>
             <div class="clear"></div>
@@ -62,21 +97,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td></td>
-                                <td></td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -88,25 +108,5 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-var json = '{ "records": [ ' +
-        '{ "record":"123" , "username":"Bill" },' +
-        '{ "record":"182" , "username":"George" }, ' +
-        '{ "record":"187" , "username":"Thomas" }' +
-        ']}';
-//function putThingsInModal(){
-//    var trigger = $("body").find('[data-toggle="ranklistmodal"]');
-//    var obj = eval ("(" + json + ")");
-//    $("tbody").append("<tr><td>1</td><td>" + obj.records[0].record + "</td><td>" + obj.records[0].username + "</td></tr>")
-//    $("tbody").$("tr").each(
-//
-//    )
-//}
-////the function call:
-//
-//$(document).ready(function(){
-//    putThingsInModal();
-//});
-</script>
 </body>
 </html>
