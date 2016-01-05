@@ -71,7 +71,7 @@
 3. 并且游戏包含了后端与前端，后端实现了两个简单的功能，第一个是添加记录，即游戏结束时弹窗会要求玩家输入姓名，保存游戏记录。
 ![snapshot3](https://github.com/MandyXue/WebGame/blob/master/public/images/snapshot3.png?raw=true)
 4. 后端的第二个功能就是查看游戏的排行榜，玩家可以随时点击右上角的button来查看游戏的前三名。
-![snapshot4](https://github.com/MandyXue/WebGame/blob/master/public/images/snapshot4s.png?raw=true)
+![snapshot4](https://github.com/MandyXue/WebGame/blob/master/public/images/snapshot4.png?raw=true)
 
 ## 代码说明
 
@@ -287,7 +287,7 @@ WebGame/
 	}
 	```
 
-
-
+====
+Copyright © Mandy Xue
 
 
